@@ -24,7 +24,7 @@ import javax.sql.DataSource;
 @MapperScan(basePackages = "com.demo.fin.orm.manage.mapper", sqlSessionTemplateRef  = "mexcSqlSessionTemplate")
 public class DataSource1Config {
     @Value("classpath*:mapper/*.xml")
-    private Resource[] mapperLocations;
+    private Resource[] mapperLocations;     
 
     @Bean(name = "baiduDataSourece")
     @ConfigurationProperties(prefix = "spring.datasource.manage")
@@ -38,7 +38,7 @@ public class DataSource1Config {
     public SqlSessionFactory mSqlSessionFactory(@Qualifier("baiduDataSourece") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
-      /*加载mybatis全局配置文件*/
+      /*加载mybatis全局配置文件*/;
 //        bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResource("classpath:mapper/*.xml"));
       /*加载所有的mapper.xml映射文件*/
         bean.setMapperLocations(mapperLocations);

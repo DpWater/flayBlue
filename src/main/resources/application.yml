@@ -1,0 +1,21 @@
+server:
+  port: 8686
+
+
+spring:
+    datasource:
+      mysql:
+        driverClassName: com.mysql.jdbc.Driver
+        url:  dbc:mysql://localhost:3306/test1?useUnicode=true&characterEncoding=utf-8
+        username:  root
+        password:  root
+      mysql2:
+        driverClassName: com.mysql.jdbc.Driver
+        url:  dbc:mysql://localhost:3306/test1?useUnicode=true&characterEncoding=utf-8
+        username:  root
+        password:  root
+    ..suffix: .ftl
+    .freemarker.template-loader-path: classpath:/templates/
+    .mvc.view.suffix: .ftl
+
+

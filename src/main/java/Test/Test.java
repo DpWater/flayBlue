@@ -1,6 +1,9 @@
 package Test;
 
+import com.zzxj.flyBlue.Task.TestTask;
 import freemarker.template.TemplateException;
+import org.quartz.*;
+import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
@@ -622,8 +625,25 @@ public class Test {
             "PyL/AL5U1HkY2r6BKmHBPVJFAW7xOGln0Sa9Q3e59FVDGzHt+dZ9keazbPJHmaWPVBpKbZ5Y8jTi\n" +
             "vRBNerLr/SHpRWX+oPetaPKPhqCspI9RRQQYr0JxD/pnPf8AM1y53/Tuv/Bf60lVi5ijmrviH/SI\n" +
             "/wDEfkao/wCWrECYNHOKUvZNJV+tAg70VLO5oudAaUgjcUKsrH/p/c0KNTxf/9l=";
-    public static void main(String args[]) {
+    public static void main(String args[]) throws SchedulerException {
+//        使用freemarker生成ftl
+//        createDocWithFreemarker();
+        JobDetail myJob = JobBuilder.newJob(TestTask.class).withIdentity("myJob").build();
 
+        Trigger trigger = TriggerBuilder.newTrigger()
+                .withIdentity("myTrigger", "group1")
+                .startNow()
+                .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(2).repeatForever())
+                .build();
+
+        SchedulerFactory safc = new StdSchedulerFactory();
+        Scheduler scheduler = safc.getScheduler();
+        scheduler.start();
+        scheduler.scheduleJob(myJob,trigger);
+
+    }
+
+    private static void createDocWithFreemarker() {
         // 模板文件名
         String templateFileName = "exportTempledWord.ftl";
         // 模板文件所在位置

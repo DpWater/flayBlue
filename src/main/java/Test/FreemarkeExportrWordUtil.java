@@ -3,7 +3,6 @@ package Test;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import sun.misc.BASE64Encoder;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -702,22 +701,6 @@ public class FreemarkeExportrWordUtil {
         return resultFile;
     }
 
-    /**
-     * 获取图片对应的base64码
-     *
-     * @param imgFile
-     *         图片
-     * @return 图片对应的base64码
-     * @throws IOException
-     * @date 2018/11/16 17:05
-     */
-    public static String getImageBase64String(File imgFile) throws IOException {
-        InputStream inputStream = new FileInputStream(imgFile);
-        byte[] data = new byte[inputStream.available()];
-        int totalNumberBytes = inputStream.read(data);
-        BASE64Encoder encoder = new BASE64Encoder();
-        return encoder.encode(data);
-    }
 
     public static void main(String args[])
     {
